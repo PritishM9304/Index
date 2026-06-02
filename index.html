@@ -259,38 +259,33 @@
 </head>
 <body>
 
-    <h1>Our Story</h1>
-    <div class="subtitle">A Celebration of Us</div>
+    <h1>Happy Two Years</h1>
+    <div class="subtitle">For all the times You made me Crazy about you</div>
 
     <main class="scrapbook-grid">
         <div class="chapter-card" onclick="openChapter('chapter1')">
             <div>
                 <div class="card-num">Chapter I</div>
-                <h2>The days I spend talking to the mother of my kids</h2>
+                <h2>When I starting to understand what a wonderful human being you are</h2>
             </div>
             <button class="open-btn">View Memories</button>
         </div>
         <div class="chapter-card" onclick="openChapter('chapter2')">
             <div>
                 <div class="card-num">Chapter II</div>
-                <h2>The dates and trips that we had along</h2>
+                <h2>Weird Faces My girlfriend makes which I find more than Cute</h2>
             </div>
             <button class="open-btn">View Memories</button>
         </div>
         <div class="chapter-card" onclick="openChapter('chapter3')">
             <div>
                 <div class="card-num">Chapter III</div>
-                <h2>The Night we actually met</h2>
+                <h2>The Nights (we met) and I fell in love all over again</h2>
             </div>
             <button class="open-btn">View Memories</button>
         </div>
         <div class="chapter-card" onclick="openChapter('chapter4')">
             <div>
-                <div class="card-num">Chapter IV</div>
-                <h2>Nights I fell in love with u all over again</h2>
-            </div>
-            <button class="open-btn">View Memories</button>
-        </div>
     </main>
 
     <div class="letter-section">
@@ -317,42 +312,57 @@
         */
         const chapterData = {
             chapter1: {
-                title: "Talking to the mother of my kids",
+                title: "When I starting to understand what a wonderful human being you are",
                 entries: [
                     { 
-                        image: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=800&auto=format&fit=crop", 
-                        note: "Every conversation we have makes me look forward to our future together even more." 
+                        image: "WhatsApp Image 2026-06-02 at 9.57.42 PM (1).jpeg", 
+                        note: "When we were watching Inside out 2 and U looked like a baby in my hoodie during the interval." 
                     },
                     { 
-                        image: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=800&auto=format&fit=crop", 
-                        note: "I love the depth and the silliness of the things we talk about." 
+                        image: "WhatsApp Image 2026-06-02 at 9.57.42 PM (3).jpeg", 
+                        note: "One of the first times we did VC where u made cute faces." 
                     }
                 ]
             },
             chapter2: {
-                title: "Our Dates and Trips",
+                title: "Weird Faces My girlfriend makes which I find more than Cute",
                 entries: [
                     { 
-                        image: "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?q=80&w=800&auto=format&fit=crop", 
-                        note: "Remember Goa? The beaches were beautiful, but my favorite view was you." 
+                        image: "WhatsApp Image 2026-06-02 at 9.57.38 PM (1).jpeg", 
+                        note: "I know your frnd clicked this photo but OMG THIS IS SOOOOO CUTEEEE!!!!." 
+                    },
+                    { 
+                        image: "WhatsApp Image 2026-06-02 at 9.57.42 PM.jpeg", 
+                        note: "Your face looks like a Tomato when U eat was the first thought when I saw you destroy that baked pasta." 
+                    },
+                    { 
+                        image: "WhatsApp Image 2026-06-02 at 9.57.40 PM.jpeg", 
+                        note: "CHEERS BHAISAHAB!!!!" 
+                    },
+                    { 
+                        image: "WhatsApp Image 2026-06-02 at 9.57.36 PM.jpeg", 
+                        note: "Vanderlande were Irritating you but u looked sooooo freakingggg cuteeeeeee." 
                     }
                 ]
             },
             chapter3: {
-                title: "The Night We Met",
+                title: "The Nights (we met) and I fell in love all over again",
                 entries: [
                     { 
-                        image: "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=800&auto=format&fit=crop", 
-                        note: "I didn't know it yet, but that night changed everything for me." 
-                    }
-                ]
-            },
-            chapter4: {
-                title: "Falling in Love Again",
-                entries: [
+                        image: "WhatsApp Image 2026-06-02 at 9.57.36 PM (1).jpeg", 
+                        note: "I almost cried this day. You looked soo beautiful adn I realised all oer again how wonderful u r" 
+                    },
                     { 
-                        image: "https://images.unsplash.com/photo-1499209974431-9dddcece7f88?q=80&w=800&auto=format&fit=crop", 
-                        note: "It's in the quiet moments that I realize just how deeply I love you." 
+                        image: "WhatsApp Image 2026-06-02 at 9.57.41 PM.jpeg", 
+                        note: "I'll never forget the moment I was finding you and u were brightly looking at me from the whole crowd." 
+                    },
+                    { 
+                        image: "WhatsApp Image 2026-06-02 at 9.57.41 PM (1).jpeg", 
+                        note: "The day we overpaid for a meal and laughed over it as one of the best days ever." 
+                    },
+                    { 
+                        image: "WhatsApp Image 2026-06-02 at 9.57.40 PM (2).jpeg", 
+                        note: "Sunidhi's Bday in an hr and we were roaming around stupidly wearing kid's chasmas.The first time we spent a winter night." 
                     }
                 ]
             }
@@ -362,21 +372,25 @@
            You can write as much as you want here.
            Use \n to start a new line (paragraph).
         */
-        const loveLetterContent = `My Dearest,
+        const loveLetterContent = `Mera personal Gadha,
 
-Happy Anniversary. 
+Happy Anniversary mera shonaa bacha.
 
-Writing this for you made me reflect on everything we've shared, and I am overwhelmed with gratitude. From that very first night we met, my life has been filled with a color and warmth I didn't know was possible.
+What ever I have written or potrayed above is just a inch of the memories we had but Omg there are soo many things we have done. From 1st dates to fights to nakras and to laughing uncontrollably over stupid stuff.
 
-Every chapter of this little digital scrapbook represents just a fraction of the memories I hold dear. The conversations we have—about everything and nothing—are the highlight of my days. Traveling and experiencing new things with you are the adventures I live for.
+Your Laugh is still the bst thing I have ever heard in my whole life and I wait everyday to hear. I remember trying to make u laugh in college when we used to sit together and I was soo devatated when u started goin
 
-You are my partner, my confidant, and my favorite human. I fall in love with you all over again, not just in the big moments, but in the quiet ones, too.
+to the internship. I was happy but I had lost my partner who laughed at everything. 
 
-Thank you for being you, and for choosing to share your life with me. I can't wait to see what the next chapters hold for us.
+Baby apart from my partner I have soo much respect for you as a woman. You are brave, kind, elegant and omgggg sooo Honest and everytime I feel overwhelmed by u I get hit by another side 
 
-With all my love,
+of ur beauty. Thank you for alwyas being there for me. Thank you for understanding my pain and problems. Thank you for giving me attention when it's not that important but still you do.
 
-Me`;
+Thank you for making me feel like the luckiest damnn Man in the whole wide world.
+
+I Love you soooo muchh falu and I'll keep loving you till my last breath,
+
+Tera Pyaara Gadha`;
 
         // Interaction Logic
         const modal = document.getElementById('modal-overlay');
