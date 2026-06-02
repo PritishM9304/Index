@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<meta name="robots" content="noindex, nofollow">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -303,6 +304,15 @@
     </div>
 
     <script>
+        const secretAnswer = prompt("Before you enter... what is the secret password?");
+
+// Check if the answer is wrong (Change "falu" to whatever you want the password to be!)
+if (secretAnswer.toLowerCase() !== "Boobeshwar") {
+    document.body.innerHTML = "<h1 style='text-align:center; margin-top:20vh; color:#5e503f;'>Nice try, but this is only for my girlfriend! 😜</h1>";
+    throw new Error("Wrong password!"); // Stops the rest of the website from loading
+}
+
+        
         /* ====================================================
         EDIT YOUR MEMORIES & LETTER HERE
         ====================================================
