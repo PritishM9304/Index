@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Story | Anniversary Edition</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        /* 1. Define Aesthetic Color Palette & Typography */
+        :root {
+            --bg-color: #fdfcf5; /* Light Cream */
+            --card-bg: #f3e9dc;  /* Warm Beige */
+            --text-main: #5e503f; /* Muted Taupe/Brown */
+            --text-light: #8e7d6a;
+            --accent-color: #c6ac8f; /* Soft Tan */
+            --border-color: #dacfc0;
+            
+            --font-title: 'Cormorant Garamond', serif; /* Classy Serif */
+            --font-body: 'Montserrat', sans-serif;   /* Clean Sans-Serif */
+        }
+
+        /* 2. Global Styles */
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 60px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+            letter-spacing: 0.02em; /* Slightly wider spacing for aesthetics */
+        }
+
+        h1 {
+            font-family: var(--font-title);
+            font-size: 3.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--text-main);
+            text-align: center;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            margin-bottom: 80px;
+            text-align: center;
+        }
+
+        /* 3. Chapter Grid */
+        .scrapbook-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            max-width: 1100px;
+            width: 100%;
+            margin-bottom: 100px; /* Space before the letter */
+        }
+
+        /* Refined Card Style */
+        .chapter-card {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 4px; /* Subtle rounded corners */
+            box-shadow: 0 4px 20px rgba(94, 80, 63, 0.08); /* Soft shadow */
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 250px;
+        }
+
+        /* Subtle Hover Effect */
+        .chapter-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(94, 80, 63, 0.12);
+        }
+
+        .card-num {
+            font-family: var(--font-title);
+            font-size: 1.2rem;
+            font-style: italic;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+        }
+
+        .chapter-card h2 {
+            font-family: var(--font-title);
+            font-size: 1.8rem;
+            font-weight: 400;
+            line-height: 1.3;
+            color: var(--text-main);
+            margin: 0 0 30px 0;
+        }
+
+        .open-btn {
+            background: none;
+            border: 1px solid var(--text-light);
+            color: var(--text-main);
+            padding: 12px 24px;
+            border-radius: 2px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-family: var(--font-body);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .open-btn:hover {
+            background-color: var(--text-main);
+            color: var(--bg-color);
+            border-color: var(--text-main);
+        }
+
+        /* 4. Letter Symbol at the end */
+        .letter-section {
+            text-align: center;
+            width: 100%;
+            max-width: 600px;
+            border-top: 1px solid var(--border-color);
+            padding-top: 60px;
+            margin-top: 20px;
+        }
+
+        .letter-instruction {
+            font-family: var(--font-title);
+            font-size: 1.4rem;
+            font-style: italic;
+            color: var(--text-light);
+            margin-bottom: 25px;
+        }
+
+        /* The clickable envelope symbol */
+        .letter-symbol {
+            background: none;
+            border: none;
+            color: var(--accent-color);
+            font-size: 40px;
+            cursor: pointer;
+            transition: color 0.3s ease, transform 0.3s ease;
+            padding: 10px;
+        }
+
+        .letter-symbol:hover {
+            color: var(--text-main);
+            transform: scale(1.1);
+        }
+
+        /* 5. Minimalist Modal/Overlay */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(94, 80, 63, 0.4); /* Muted tinted background */
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(4px); /* Modern blur effect */
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .modal.open {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background: var(--bg-color);
+            width: 90%;
+            max-width: 700px;
+            max-height: 85vh;
+            overflow-y: auto;
+            padding: 60px;
+            border-radius: 2px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.4s ease;
+            border: 1px solid var(--border-color);
+        }
+
+        .modal.open .modal-content {
+            transform: scale(1);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 25px; right: 30px;
+            font-size: 28px;
+            color: var(--text-light);
+            cursor: pointer;
+            border: none; background: none;
+            transition: color 0.2s;
+        }
+        
+        .close-btn:hover { color: var(--text-main); }
+
+        /* 6. Inside Modal Content Styling */
+        
+        /* Layout for photo entries */
+        .photo-entry {
+            margin-bottom: 50px;
+            text-align: center;
+        }
+
+        .photo-wrapper {
+            display: inline-block;
+            background: #fff;
+            padding: 12px;
+            border-radius: 2px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 25px;
+            border: 1px solid #f0f0f0;
+        }
+
+        .photo-entry img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .note {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: var(--text-main);
+            max-width: 500px;
+            margin: 0 auto;
+            font-weight: 400;
+        }
+
+        /* Specific styling for the final love letter text */
+        .love-letter-text {
+            font-family: var(--font-body);
+            font-size: 1.1rem;
+            line-height: 2; /* Relaxed line height for reading */
+            color: var(--text-main);
+            white-space: pre-wrap; /* Respects line breaks you write */
+            text-align: left;
+        }
+
+        /* Mobile adjustments */
+        @media (max-width: 600px) {
+            h1 { font-size: 2.4rem; }
+            body { padding: 40px 15px; }
+            .modal-content { padding: 40px 20px; }
+            .scrapbook-grid { gap: 25px; }
+            .chapter-card { padding: 30px 20px; min-height: 200px;}
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Our Story</h1>
+    <div class="subtitle">A Celebration of Us</div>
+
+    <main class="scrapbook-grid">
+        <div class="chapter-card" onclick="openChapter('chapter1')">
+            <div>
+                <div class="card-num">Chapter I</div>
+                <h2>The days I spend talking to the mother of my kids</h2>
+            </div>
+            <button class="open-btn">View Memories</button>
+        </div>
+        <div class="chapter-card" onclick="openChapter('chapter2')">
+            <div>
+                <div class="card-num">Chapter II</div>
+                <h2>The dates and trips that we had along</h2>
+            </div>
+            <button class="open-btn">View Memories</button>
+        </div>
+        <div class="chapter-card" onclick="openChapter('chapter3')">
+            <div>
+                <div class="card-num">Chapter III</div>
+                <h2>The Night we actually met</h2>
+            </div>
+            <button class="open-btn">View Memories</button>
+        </div>
+        <div class="chapter-card" onclick="openChapter('chapter4')">
+            <div>
+                <div class="card-num">Chapter IV</div>
+                <h2>Nights I fell in love with u all over again</h2>
+            </div>
+            <button class="open-btn">View Memories</button>
+        </div>
+    </main>
+
+    <div class="letter-section">
+        <div class="letter-instruction">And finally, a letter just for you...</div>
+        <button class="letter-symbol" onclick="openLetter()" title="Open Letter">✉</button>
+    </div>
+
+    <div id="modal-overlay" class="modal" onclick="closeOnBackground(event)">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal()">×</button>
+            
+            <h2 id="modal-title" style="font-family: var(--font-title); font-size: 2.2rem; text-align: center; margin-bottom: 50px; margin-top: 10px; font-weight: 400;"></h2>
+            
+            <div id="modal-photos-content"></div>
+            
+            <div id="modal-letter-content" class="love-letter-text" style="display:none;"></div>
+        </div>
+    </div>
+
+    <script>
+        /* ====================================================
+        EDIT YOUR MEMORIES & LETTER HERE
+        ====================================================
+        */
+        const chapterData = {
+            chapter1: {
+                title: "Talking to the mother of my kids",
+                entries: [
+                    { 
+                        image: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=800&auto=format&fit=crop", 
+                        note: "Every conversation we have makes me look forward to our future together even more." 
+                    },
+                    { 
+                        image: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=800&auto=format&fit=crop", 
+                        note: "I love the depth and the silliness of the things we talk about." 
+                    }
+                ]
+            },
+            chapter2: {
+                title: "Our Dates and Trips",
+                entries: [
+                    { 
+                        image: "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?q=80&w=800&auto=format&fit=crop", 
+                        note: "Remember Goa? The beaches were beautiful, but my favorite view was you." 
+                    }
+                ]
+            },
+            chapter3: {
+                title: "The Night We Met",
+                entries: [
+                    { 
+                        image: "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=800&auto=format&fit=crop", 
+                        note: "I didn't know it yet, but that night changed everything for me." 
+                    }
+                ]
+            },
+            chapter4: {
+                title: "Falling in Love Again",
+                entries: [
+                    { 
+                        image: "https://images.unsplash.com/photo-1499209974431-9dddcece7f88?q=80&w=800&auto=format&fit=crop", 
+                        note: "It's in the quiet moments that I realize just how deeply I love you." 
+                    }
+                ]
+            }
+        };
+
+        /* YOUR LOVE LETTER CONTENT
+           You can write as much as you want here.
+           Use \n to start a new line (paragraph).
+        */
+        const loveLetterContent = `My Dearest,
+
+Happy Anniversary. 
+
+Writing this for you made me reflect on everything we've shared, and I am overwhelmed with gratitude. From that very first night we met, my life has been filled with a color and warmth I didn't know was possible.
+
+Every chapter of this little digital scrapbook represents just a fraction of the memories I hold dear. The conversations we have—about everything and nothing—are the highlight of my days. Traveling and experiencing new things with you are the adventures I live for.
+
+You are my partner, my confidant, and my favorite human. I fall in love with you all over again, not just in the big moments, but in the quiet ones, too.
+
+Thank you for being you, and for choosing to share your life with me. I can't wait to see what the next chapters hold for us.
+
+With all my love,
+
+Me`;
+
+        // Interaction Logic
+        const modal = document.getElementById('modal-overlay');
+        const modalTitle = document.getElementById('modal-title');
+        const photosArea = document.getElementById('modal-photos-content');
+        const letterArea = document.getElementById('modal-letter-content');
+
+        // Function to open a specific photo chapter
+        function openChapter(chapterId) {
+            const data = chapterData[chapterId];
+            modalTitle.innerText = data.title;
+            
+            // Prepare modal for photos
+            photosArea.innerHTML = ''; 
+            photosArea.style.display = 'block';
+            letterArea.style.display = 'none';
+
+            // Build the photo and note entries
+            data.entries.forEach(entry => {
+                const entryDiv = document.createElement('div');
+                entryDiv.className = 'photo-entry';
+                
+                const wrapper = document.createElement('div');
+                wrapper.className = 'photo-wrapper';
+                
+                const img = document.createElement('img');
+                img.src = entry.image;
+                img.alt = "Memory";
+
+                const note = document.createElement('div');
+                note.className = 'note';
+                note.innerText = entry.note;
+
+                wrapper.appendChild(img);
+                entryDiv.appendChild(wrapper);
+                entryDiv.appendChild(note);
+                photosArea.appendChild(entryDiv);
+            });
+
+            // Open the modal with a smooth fade
+            modal.classList.add('open');
+        }
+
+        // Function to open the special love letter
+        function openLetter() {
+            modalTitle.innerText = "To My Favorite Person";
+            
+            // Prepare modal for the letter text
+            photosArea.style.display = 'none';
+            letterArea.style.display = 'block';
+            letterArea.innerText = loveLetterContent; // Sets the text you wrote above
+
+            // Open modal
+            modal.classList.add('open');
+        }
+
+        function closeModal() {
+            modal.classList.remove('open');
+        }
+
+        // Close when clicking outside the content area
+        function closeOnBackground(event) {
+            if(event.target === modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>
